@@ -27,7 +27,7 @@
         <tbody>
           <?php foreach($carts as $cart){ ?>
           <tr>
-            <td><img src="<?php print(IMAGE_PATH . $cart['image']);?>" class="item_image"></td>
+            <td><img src="<?php print(IMAGE_PATH . (h($cart['image'])));?>" class="item_image"></td>
             <td><?php print(h($cart['name'])); ?></td>
             <td><?php print(number_format(h($cart['price']))); ?>円</td>
             <td>
@@ -51,7 +51,7 @@
           <?php } ?>
         </tbody>
       </table>
-      <p class="text-right">合計金額: <?php print number_format(h($total_price)); ?>円</p>
+      <p class="text-right">合計金額: <?php print number_format($total_price); ?>円</p>
       <form method="post" action="finish.php">
         <input class="btn btn-block btn-primary" type="submit" value="購入する">
       </form>
