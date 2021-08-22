@@ -17,7 +17,7 @@ $db = get_db_connect();
 
 if (is_valid_csrf_token($token) === false) {
   set_error('不正な操作が行われました');
-  redirect_to(ADMIN_URL);
+  redirect_to(LOGIN_URL);
 }
 
 $user = login_as($db, $name, $password);
