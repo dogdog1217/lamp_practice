@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: mysql
--- 生成日時: 2021 年 8 月 27 日 13:49
+-- 生成日時: 2021 年 8 月 31 日 09:39
 -- サーバのバージョン： 5.7.35
 -- PHP のバージョン: 7.4.20
 
@@ -28,7 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `orders` (
-  `cart_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `item_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -40,22 +41,11 @@ CREATE TABLE `orders` (
 --
 
 CREATE TABLE `order_details` (
-  `cart_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   `created` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- テーブルの構造 `products`
---
-
-CREATE TABLE `products` (
-  `item_id` int(11) NOT NULL,
-  `name` varchar(11) NOT NULL,
-  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -66,13 +56,13 @@ CREATE TABLE `products` (
 -- テーブルのインデックス `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`cart_id`);
+  ADD PRIMARY KEY (`order_id`);
 
 --
 -- テーブルのインデックス `order_details`
 --
 ALTER TABLE `order_details`
-  ADD PRIMARY KEY (`cart_id`);
+  ADD PRIMARY KEY (`order_id`);
 
 --
 -- ダンプしたテーブルの AUTO_INCREMENT
@@ -82,13 +72,13 @@ ALTER TABLE `order_details`
 -- テーブルの AUTO_INCREMENT `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- テーブルの AUTO_INCREMENT `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
