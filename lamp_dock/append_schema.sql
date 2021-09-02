@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: mysql
--- 生成日時: 2021 年 8 月 31 日 09:39
+-- 生成日時: 2021 年 9 月 02 日 14:24
 -- サーバのバージョン： 5.7.35
 -- PHP のバージョン: 7.4.20
 
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -62,7 +61,7 @@ ALTER TABLE `orders`
 -- テーブルのインデックス `order_details`
 --
 ALTER TABLE `order_details`
-  ADD PRIMARY KEY (`order_id`);
+  ADD PRIMARY KEY (`order_id`,`item_id`) USING BTREE;
 
 --
 -- ダンプしたテーブルの AUTO_INCREMENT
