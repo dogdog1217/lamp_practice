@@ -23,4 +23,4 @@ if(is_admin($user)){
     $order_details = get_users_order_details($db, $order_id, $user['user_id']);
 }
 
-include_once VIEW_PATH . 'orders_view.php';
+include_once VIEW_PATH . 'order_details_view.php';
