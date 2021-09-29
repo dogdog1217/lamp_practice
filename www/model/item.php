@@ -43,6 +43,32 @@ function get_items($db, $is_open = false){
   return fetch_all_query($db, $sql);
 }
 
+function get_items_ranking($db, $item_id){
+  $sql = '
+  SELECT
+    items.item_id,
+    items.name,
+    items.price,
+    items.image,
+    order_details.item_id,
+    order_details.price
+    SUM(amount)
+  FROM
+    order_details
+  JOIN
+    items
+  ON
+    items.item_id = order_details.item_id
+  GROUP BY
+    order_details.item_id
+  ORDER BY
+    order_details.amount
+  LIMIT
+    3
+    ';
+  return fetch_all_query($db, $sql, [$item_id]);
+}
+
 function get_all_items($db){
   return get_items($db);
 }
@@ -50,6 +76,11 @@ function get_all_items($db){
 function get_open_items($db){
   return get_items($db, true);
 }
+
+function get_open_items_ranking($db){
+  return get_items_ranking($db, $item_id);
+}
+
 
 function regist_item($db, $name, $price, $stock, $status, $image){
   $filename = get_upload_filename($image);
@@ -82,7 +113,7 @@ function insert_item($db, $name, $price, $stock, $filename, $status){
         image,
         status
       )
-    VALUES(?, ?, ?, ?', ?);
+    VALUES(?, ?, ?, ?, ?);
   ";
 
   return execute_query($db, $sql, [$name, $price, $stock, $filename, $status_value]);

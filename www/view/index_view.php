@@ -42,6 +42,29 @@
       <?php } ?>
       </div>
     </div>
+
+    <h1>人気ランキング</h1>
+    <?php include VIEW_PATH . 'templates/messages.php'; ?>
+
+    <div class="card-deck">
+      <div class="row">
+      <?php foreach($ranks as $rank){ ?>
+        <div class="col-6 item">
+          <div class="card h-100 text-center">
+            <div class="card-header">
+              <?php print(h($rank['name'])); ?>
+            </div>
+            <figure class="card-body">
+              <img class="card-img" src="<?php print(IMAGE_PATH . (h($rank['image']))); ?>">
+              <figcaption>
+                <?php print(number_format(h($rank['price']))); ?>円
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      <?php } ?>
+      </div>
+    </div>
   </div>
   
 </body>
