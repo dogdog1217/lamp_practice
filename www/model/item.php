@@ -53,11 +53,11 @@ function get_items_ranking($db){
       SUM(amount) as total
     FROM
       order_details
-    WHERE status = 1
     JOIN
       items
     ON
       items.item_id = order_details.item_id
+    WHERE status = 1
     GROUP BY
       order_details.item_id
     ORDER BY
